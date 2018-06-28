@@ -40,7 +40,7 @@ class WxController extends \yii\web\Controller
         $avatar_url = $request->get('avatar_url');
         $openid = $request->get('openid','oqDzs0O_XXgUSq0pR6KzkJ7x2J0s');
         $user = Users::findOne(['openid' => $openid]);
-        var_dump(YII_ENV);die;
+        var_dump($openid);die;
 
 
 
