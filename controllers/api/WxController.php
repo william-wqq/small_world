@@ -16,7 +16,7 @@ class WxController extends \yii\web\Controller
         $request = Yii::$app->request;
         $appId = Yii::$app->params['AppID'];
         $appSecret = Yii::$app->params['AppSecret'];
-        $jsCode = $request->get('js_code');
+        $jsCode = $request->get('code');
 
         //var_dump($appId);
         $url    = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appId.'&secret='.$appSecret.'&grant_type=authorization_code'.'&js_code='.$jsCode;
