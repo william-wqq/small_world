@@ -4,14 +4,13 @@ $params = require __DIR__ . '/params.php';
 
 if(YII_ENV == 'dev'){
     $db = require __DIR__ . '/dev_db.php';
-}else if(YII_ENV == 'pro') {
-    $db = require __DIR__ . '/db.php';
-}else {
+} else {
     $db = require __DIR__ . '/db.php';
 }
 
 
 $config = [
+    'timeZone' => 'Asia/Shanghai',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
