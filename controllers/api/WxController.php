@@ -27,7 +27,7 @@ class WxController extends \yii\web\Controller
         $resultJson = file_get_contents($url);
         $resultArray = json_decode($resultJson, TRUE);
         //print_r($resultArray);
-        SmallWorld::sendSuccess('返回成功', $resultArray);
+        return SmallWorld::sendSuccess('返回成功', $resultArray);
     }
 
     /**
