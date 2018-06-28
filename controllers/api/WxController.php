@@ -42,7 +42,7 @@ class WxController extends \yii\web\Controller
         $avatar_url = $request->get('avatar_url');
         $openid = $request->get('openid','oqDzs0O_XXgUSq0pR6KzkJ7x2J0s');
         $user = Users::findOne(['openid' => $openid]);
-        if($user->id) {
+        if($user->uid) {
             return SmallWorld::sendSuccess('用户存在', $user->toArray());
         }
 
@@ -67,7 +67,7 @@ class WxController extends \yii\web\Controller
         $request = Yii::$app->request;
         $uid = $request->get('uid');
         $user = Users::findOne(['uid' => $uid]);
-        if($user->id) {
+        if($user->uid) {
             return SmallWorld::sendSuccess('返回用户'.$uid, $user->toArray());
         }
         return SmallWorld::sendError('查无用户'.$uid);

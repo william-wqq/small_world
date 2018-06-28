@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "sw_user".
  *
- * @property int $id 用户id
+ * @property int $uid 用户id
  * @property string $nickname 微信名
  * @property int $openid openid
  * @property string $avatar_url 微信头像
