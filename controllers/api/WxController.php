@@ -72,6 +72,11 @@ class WxController extends \yii\web\Controller
     public function getUserInfo() {
         $request = Yii::$app->request;
         $uid = $request->get('uid');
+        $user = Users::findOne(['id' => $uid]);
+        if($user->id) {
+            return SmallWorld::sendSuccess('返回用户'.$uid, $user->toArray());
+        }
+        return SmallWorld::sendError('查无用户'.$uid);
     }
 
 
