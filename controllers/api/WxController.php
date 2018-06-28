@@ -42,12 +42,8 @@ class WxController extends \yii\web\Controller
         $avatar_url = $request->get('avatar_url');
         $openid = $request->get('openid','oqDzs0O_XXgUSq0pR6KzkJ7x2J0s');
         $user = Users::findOne(['openid' => $openid]);
-
-        $userData = [
-            'uid' => $user->id
-        ];
         if($user->id) {
-            return SmallWorld::sendSuccess('用户存在', $userData);
+            return SmallWorld::sendSuccess('用户存在', $user->toArray());
         }
 
         try{
@@ -57,13 +53,11 @@ class WxController extends \yii\web\Controller
             $userModel->avatar_url = $avatar_url;
             $userModel->add_time = time();
             $userModel->save();
+            $user = Users::findOne(['openid' => $openid]);
         }catch(\Exception $e) {
             return SmallWorld::sendError($e->getMessage());
         }
-        $userData = [
-            'uid' => $userModel->id
-        ];
-        return SmallWorld::sendSuccess('用户添加成功', $userData);
+        return SmallWorld::sendSuccess('用户添加成功', $user->toArray());
     }
 
     /**
@@ -72,7 +66,7 @@ class WxController extends \yii\web\Controller
     public function getUserInfo() {
         $request = Yii::$app->request;
         $uid = $request->get('uid');
-        $user = Users::findOne(['id' => $uid]);
+        $user = Users::findOne(['uid' => $uid]);
         if($user->id) {
             return SmallWorld::sendSuccess('返回用户'.$uid, $user->toArray());
         }
