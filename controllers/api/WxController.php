@@ -38,7 +38,7 @@ class WxController extends \yii\web\Controller
         $request = Yii::$app->request;
         $nickname = $request->get('nickname');
         $avatar_url = $request->get('avatar_url');
-        $openid = $request->get('openid');
+        $openid = $request->get('openid','oqDzs0O_XXgUSq0pR6KzkJ7x2J0s');
         $user = Users::findOne(['openid' => $openid]);
         var_dump($user);
 
