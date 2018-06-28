@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers\api;
+use app\helper\SmallWorld;
 use Yii;
 
 class TestController extends \yii\web\Controller
@@ -11,7 +12,7 @@ class TestController extends \yii\web\Controller
             'name' => 'wqq',
             'sex' => 1,
         ];
-        return $this->sendSuccess('成功', $data);
+        return SmallWorld::sendSuccess('成功', $data);
     }
     public function actionOpenid(){
         $request = Yii::$app->request;
