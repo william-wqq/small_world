@@ -1,7 +1,15 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+
+if(YII_ENV == 'dev'){
+    $db = require __DIR__ . '/dev_db.php';
+}else if(YII_ENV == 'pro') {
+    $db = require __DIR__ . '/db.php';
+}else {
+    $db = require __DIR__ . '/db.php';
+}
+
 
 $config = [
     'id' => 'basic',

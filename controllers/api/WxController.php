@@ -1,6 +1,8 @@
 <?php
 
 namespace app\controllers\api;
+use app\helper\SmallWorld;
+use app\models\Users;
 use Yii;
 
 class WxController extends \yii\web\Controller
@@ -11,18 +13,37 @@ class WxController extends \yii\web\Controller
     }
 
 
-
+    /**
+     * 获取openid
+     * @method GET
+     */
     public function actionOpenid(){
         $request = Yii::$app->request;
         $appId = Yii::$app->params['AppID'];
         $appSecret = Yii::$app->params['AppSecret'];
         $jsCode = $request->get('code');
 
-        //var_dump($appId);
         $url    = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appId.'&secret='.$appSecret.'&grant_type=authorization_code'.'&js_code='.$jsCode;
         $resultJson = file_get_contents($url);
         $resultArray = json_decode($resultJson, TRUE);
-        print_r($resultArray);
+        //print_r($resultArray);
+        SmallWorld::sendSuccess('返回成功', ['openid' => $resultArray['openid']]);
+    }
+
+    /**
+     * 登录
+     * @method GET
+     */
+    public function actionLogin() {
+        $request = Yii::$app->request;
+        $nickname = $request->get('nickname');
+        $avatar_url = $request->get('avatar_url');
+        $openid = $request->get('openid');
+        $user = Users::findOne(['openid' => $openid]);
+        var_dump($user);
+
+
+
     }
 
 
