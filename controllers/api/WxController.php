@@ -29,7 +29,7 @@ class WxController extends \yii\web\Controller
         $resultJson = file_get_contents($url);
         $resultArray = json_decode($resultJson, TRUE);
         //print_r($resultArray);
-        return SmallWorld::sendSuccess('返回成功', $resultArray);
+        return SmallWorld::sendSuccess('返回openid成功', $resultArray);
     }
 
     /**
@@ -63,7 +63,7 @@ class WxController extends \yii\web\Controller
     /**
      * 获取用户信息
      */
-    public function getUserInfo() {
+    public function actionGetUserInfo() {
         $request = Yii::$app->request;
         $uid = $request->get('uid');
         $user = Users::findOne(['uid' => $uid]);
