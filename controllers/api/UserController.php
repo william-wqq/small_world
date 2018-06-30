@@ -59,9 +59,7 @@ class UserController extends \yii\web\Controller
         $user = Users::findOne(['uid' => $uid]);
         if (!$user->uid)
             return sendError('用户不存在');
-
-        $user = new Users();
-        $user->uid = $uid;
+        
         $user->username = $username;
         $user->phone = $phone;
         $user->wx_number = $wx_number;
@@ -86,7 +84,7 @@ class UserController extends \yii\web\Controller
                 return sendError('手机只能是11位数字');
         $result = Sms::send($phone);
         if($result && $result['error_code'] == 0) {
-            $cache->set('phone_'.$phone, $result['sms_code'], 60);
+            $cache->set('phone_'.$phone, $result['sms_code'], 5*60);
             Yii::info($phone . '发送短信成功，验证码：' . $result['sms_code'] . '，返回' . json_encode($result), 'sms');
             return sendSuccess('发送成功');
         }
