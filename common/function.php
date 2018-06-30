@@ -38,7 +38,7 @@
     }
 
     function isName($username) {
-        if(preg_match('/^([\u4e00-\u9fa5]){2,7}$/', $username))
+        if(preg_match(' /^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/', $username))
             return true;
         return false;
     }
