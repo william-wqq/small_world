@@ -26,6 +26,33 @@ class UserController extends \yii\web\Controller
         $code = $request->get('code');
         $wx_number = $request->get('wx_number');
 
+        if(!$uid)
+            return sendError('参数有误');
+
+        if(empty($username))
+            return sendError('姓名不能为空');
+        else
+            if(!isName($username))
+                return sendError('姓名只能为中文');
+
+        if(empty($phone))
+            return sendError('手机号不能为空');
+        else
+            if(!isMobile($phone))
+                return sendError('手机只能是11位数字');
+
+        if(empty($code))
+            return sendError('验证码不能为空');
+        else
+            if(!preg_match('/\d{6}/', $code))
+                return sendError('验证码不正确');
+
+        if(empty($wx_number))
+            return sendError('微信号不能为空');
+        else
+            if(!isWxNumber($wx_number))
+                return sendError('微信号格式不正确');
+
         if(!$this->actionCheckCode($phone, $code))
             return sendError('短信验证码不正确');
 

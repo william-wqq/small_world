@@ -31,4 +31,22 @@
         return json_encode($data);
     }
 
+    function isMobile($phone) {
+        if(preg_match('/^1\d{10}/', $phone))
+            return true;
+        return false;
+    }
+
+    function isName($username) {
+        if(preg_match('/^([\u4e00-\u9fa5]){2,7}$/', $username))
+            return true;
+        return false;
+    }
+
+    function isWxNumber($wx_number) {
+        if(preg_match('/^[a-zA-Z\d_]{5,}$/', $wx_number))
+            return true;
+        return false;
+    }
+
 ?>
