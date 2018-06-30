@@ -24,7 +24,7 @@ class Users extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'sw_users';
+        return 'users';
     }
 
     /**

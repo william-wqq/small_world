@@ -59,7 +59,7 @@ class UserController extends \yii\web\Controller
         $user = Users::findOne(['uid' => $uid]);
         if (!$user->uid)
             return sendError('用户不存在');
-        
+
         $user->username = $username;
         $user->phone = $phone;
         $user->wx_number = $wx_number;
