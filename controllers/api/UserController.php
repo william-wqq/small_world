@@ -103,8 +103,8 @@ class UserController extends \yii\web\Controller
         $cache = Yii::$app->cache;
         $sms_code = $cache->get('phone_'.$phone);
         if($sms_code != $code) {
-            return sendError('短信验证码不正确');
+            return false;
         }
-        return sendError('验证码校验通过');
+        return true;
     }
 }
