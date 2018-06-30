@@ -1,10 +1,7 @@
 <?php
 
 namespace app\controllers\api;
-use app\helper\SmallWorld;
-use app\models\User;
 use app\models\Users;
-use DeepCopy\TypeFilter\Date;
 use Yii;
 
 class WxController extends \yii\web\Controller
@@ -29,7 +26,7 @@ class WxController extends \yii\web\Controller
         $resultJson = file_get_contents($url);
         $resultArray = json_decode($resultJson, TRUE);
         //print_r($resultArray);
-        return SmallWorld::sendSuccess('返回openid成功', $resultArray);
+        return sendSuccess('返回openid成功', $resultArray);
     }
 
     /**
@@ -43,7 +40,7 @@ class WxController extends \yii\web\Controller
         $openid = $request->get('openid','oqDzs0O_XXgUSq0pR6KzkJ7x2J0s');
         $user = Users::findOne(['openid' => $openid]);
         if($user->uid) {
-            return SmallWorld::sendSuccess('用户存在', $user->toArray());
+            return sendSuccess('用户存在', $user->toArray());
         }
 
         try{
@@ -55,9 +52,9 @@ class WxController extends \yii\web\Controller
             $userModel->save();
             $user = Users::findOne(['openid' => $openid]);
         }catch(\Exception $e) {
-            return SmallWorld::sendError($e->getMessage());
+            return sendError($e->getMessage());
         }
-        return SmallWorld::sendSuccess('用户添加成功', $user->toArray());
+        return sendSuccess('用户添加成功', $user->toArray());
     }
 
     /**
@@ -68,9 +65,9 @@ class WxController extends \yii\web\Controller
         $uid = $request->get('uid');
         $user = Users::findOne(['uid' => $uid]);
         if($user->uid) {
-            return SmallWorld::sendSuccess('返回用户'.$uid, $user->toArray());
+            return sendSuccess('返回用户'.$uid, $user->toArray());
         }
-        return SmallWorld::sendError('查无用户'.$uid);
+        return sendError('查无用户'.$uid);
     }
 
 
