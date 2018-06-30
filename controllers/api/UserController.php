@@ -79,6 +79,11 @@ class UserController extends \yii\web\Controller
         $request = Yii::$app->request;
         $cache = Yii::$app->cache;
         $phone = $request->get('phone');
+        if(empty($phone))
+            return sendError('手机号不能为空');
+        else
+            if(!isMobile($phone))
+                return sendError('手机只能是11位数字');
         $result = Sms::send($phone);
         if($result && $result['error_code'] == SmallWorld::SUCCESS) {
             $cache->set('phone_'.$phone, $result['sms_code'], 60);
