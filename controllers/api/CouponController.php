@@ -14,8 +14,8 @@ class CouponController extends \yii\web\Controller
     public function actionIndex()
     {
         $request = Yii::$app->request;
-        $status = $request->get('status', UserCoupons::COUPON_WAITE);
-        $uid = $request->get('uid');
+        $status = intval($request->get('status', UserCoupons::COUPON_WAITE));
+        $uid = intval($request->get('uid'));
         if (!in_array($status, array_keys(UserCoupons::couponStatus())))
             return sendError('参数异常');
 
