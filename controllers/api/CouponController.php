@@ -19,7 +19,7 @@ class CouponController extends \yii\web\Controller
         if (!in_array($status, array_keys(UserCoupons::couponStatus())))
             return sendError('参数异常');
 
-        $coupon = UserCoupons::find()->asArray();
+        $coupon = UserCoupons::find();
         //$nowTime = time();
         if($status == UserCoupons::COUPON_WAITE)
             $coupon->where(['status' => UserCoupons::COUPON_WAITE]);
@@ -29,7 +29,7 @@ class CouponController extends \yii\web\Controller
             $coupon->where(['status' => UserCoupons::COUPON_EXPIRED]);
 
         $coupon->andWhere(['uid' => $uid]);
-        $couponList = $coupon->with('coupons')->all();
+        $couponList = $coupon->with('coupons')->asArray()->all();
         if($couponList)
             return sendSuccess('返回成功', $couponList);
         return sendError('返回失败');
